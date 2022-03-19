@@ -1,23 +1,20 @@
 import logo from './logo.svg';
 import './App.css';
+import { Button,Navbar,Nav,Container } from 'react-bootstrap';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <Navbar bg="dark" variant="dark">
+    <Container>
+    <Navbar.Brand >INVENTORY ระบบแจ้งซ่อม</Navbar.Brand>
+    <Nav className="me-auto">
+      <Nav.Link href="#home">แจ้งซ่อม</Nav.Link>
+      <Nav.Link href="#features">รายการแจ้งซ่อม</Nav.Link>
+    </Nav>
+    </Container>
+  </Navbar>
+  <br />
     </div>
   );
 }
