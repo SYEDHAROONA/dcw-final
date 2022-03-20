@@ -1,7 +1,7 @@
-import logo from './logo.svg';
 import './App.css';
-import { Button,Navbar,Nav,Container } from 'react-bootstrap';
-
+import FBLogin from './FBLogin'
+import {Navbar,Nav,Container } from 'react-bootstrap';
+ 
 function App() {
   return (
     <div className="App">
@@ -14,6 +14,7 @@ function App() {
     </Nav>
     </Container>
   </Navbar>
+  <FBLogin/>
   <br />
     </div>
   );
