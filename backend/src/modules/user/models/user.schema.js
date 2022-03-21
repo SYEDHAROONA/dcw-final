@@ -10,7 +10,7 @@ const userSchema = Schema({
     lastname: {
         type: String,
         require: true
-    }
+    },
     age: {
         type: Number,
         require: true

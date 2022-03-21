@@ -49,6 +49,7 @@ app.post('/api/fblogin', bodyParser.json(), async (req, res) => {
       access_token: token
     }
   })
+  console.log(result.data)
   if(!result.data.id){
     res.sendStatus(403)
     return
@@ -59,4 +60,4 @@ app.post('/api/fblogin', bodyParser.json(), async (req, res) => {
   let access_token = jwt.sign(data, TOKEN_SECRET, {expiresIn: '1800s'})
   res.send({access_token,username: data.username})
   }
-})
+)

@@ -1,20 +1,21 @@
 import './App.css';
-import FBLogin from './FBLogin'
-import {Navbar,Nav,Container } from 'react-bootstrap';
- 
+import Home from './Home';
+import Service from './Service'
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+} from "react-router-dom";
 function App() {
   return (
     <div className="App">
-    <Navbar bg="dark" variant="dark">
-    <Container>
-    <Navbar.Brand >INVENTORY ระบบแจ้งซ่อม</Navbar.Brand>
-    <Nav className="me-auto">
-      <Nav.Link href="#home">แจ้งซ่อม</Nav.Link>
-      <Nav.Link href="#features">รายการแจ้งซ่อม</Nav.Link>
-    </Nav>
-    </Container>
-  </Navbar>
-  <FBLogin/>
+    
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/service" element={<Service />} />
+    </Routes>
+  </BrowserRouter>,
   <br />
     </div>
   );
