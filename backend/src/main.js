@@ -5,6 +5,9 @@ const app = express()
 const bodyParser = require('body-parser')
 const port = process.env.port || 8000
 const axios = require('axios')
+const jwt = require('jsonwebtoken')
+const TOKEN_SECRET = '28497fa99673d3eb93435beb2ca9a661c7645c6ba3adbd0bdc01539c019163dbc41c5c16dc949ea6e20c0cd590e71ce9bfa5352ff456e54bf22e7855bfdae974'
+
 require('dotenv').config()
 const User = require('./user')
 mongoose.connect(process.env.DB_CONNECTION, {useNewUrlParser: true});
@@ -46,6 +49,14 @@ app.post('/api/fblogin', bodyParser.json(), async (req, res) => {
       access_token: token
     }
   })
-  console.log(result.data)
-  res.send({ok: 1})
+  if(!result.data.id){
+    res.sendStatus(403)
+    return
+  }
+  let data = {
+      username: result.data.email
+  }
+  let access_token = jwt.sign(data, TOKEN_SECRET, {expiresIn: '1800s'})
+  res.send({access_token,username: data.username})
+  }
 })
