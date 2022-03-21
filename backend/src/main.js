@@ -9,15 +9,12 @@ const jwt = require('jsonwebtoken')
 const TOKEN_SECRET = '28497fa99673d3eb93435beb2ca9a661c7645c6ba3adbd0bdc01539c019163dbc41c5c16dc949ea6e20c0cd590e71ce9bfa5352ff456e54bf22e7855bfdae974'
 
 require('dotenv').config()
-const User = require('./user')
+const User = require('./schema/user')
+const Parcel = require('./schema/parcel')
 mongoose.connect(process.env.DB_CONNECTION, {useNewUrlParser: true});
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 app.use(cors())
-
-const userRouter = require('./modules/user/user.route')
-
-app.use('/user', userRouter)
 
 app.get('/', (req, res) => {
   res.send('user management service is online...')
@@ -61,3 +58,15 @@ app.post('/api/fblogin', bodyParser.json(), async (req, res) => {
   res.send({access_token,username: data.username})
   }
 )
+
+app.post('/api/testParcel', (req, res) => {
+  const parcel = new Parcel({
+    _id: new mongoose.Types.ObjectId,
+    parcel: req.body.parcel,
+    telNum: req.body.telNum,
+    parcelNumber: req.body.parcelNumber,
+    detail: req.body.detail,
+    reason: req.body.reason
+  })
+  parcel.save().then(doc => res.send(doc))
+})
