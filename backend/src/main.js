@@ -20,16 +20,39 @@ app.get('/', (req, res) => {
   res.send('user management service is online...')
 })
 
-app.post('/testDB', (req, res) => {
-  const user = new User({
-    _id: new mongoose.Types.ObjectId,
-    name: req.body.name,
-    email: req.body.email
-  })
-  user.save().then(result => {
-    console.log(result)
-    res.send(result)
-  })
+app.post('/api/delete', (req, res) => {
+  Parcel.deleteOne({parcel,telNum,parcelNumber,detail,reason}).then(result => res.send(result))
+  console.log('here')
+})
+
+app.post('/api/find', (req, res) => {
+  let parcel = {
+    parcel: req.body.parcel,
+    telNum: req.body.telNum,
+    parcelNumber: req.body.parcelNumber,
+    detail: req.body.detail,
+    reason: req.body.reason
+  }
+  Parcel.findOne(parcel).then(result => res.send(result))
+  console.log('here')
+})
+
+app.post('/api/update', (req, res) => {
+  let filter = {
+    parcel: req.body.oldParcel.parcel,
+    telNum: req.body.oldParcel.telNum,
+    parcelNumber: req.body.oldParcel.parcelNumber,
+    detail: req.body.oldParcel.detail,
+    reason: req.body.oldParcel.reason
+  }
+  let newParcel = {
+    parcel: req.body.newParcel.parcel,
+    telNum: req.body.newParcel.telNum,
+    parcelNumber: req.body.newParcel.parcelNumber,
+    detail: req.body.newParcel.detail,
+    reason: req.body.newParcel.reason
+  }
+  Parcel.updateOne(filter, newParcel).then(result => res.send(result))
   console.log('here')
 })
 
