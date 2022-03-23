@@ -93,3 +93,23 @@ app.post('/api/testParcel', (req, res) => {
   })
   parcel.save().then(doc => res.send(doc))
 })
+
+app.post('/api/google-login', async (req, res) => {
+  let token = req.body.token
+  let result = await axios.get('https://oauth2.googleapis.com/tokeninfo', {
+    params: {
+      id_token: token,
+    },
+  });
+  console.log(result.data)
+  if(!result.data.name){
+    res.sendStatus(403)
+    return
+  }
+  let data = {
+      username: result.data.email
+  }
+  let access_token = jwt.sign(data, TOKEN_SECRET, {expiresIn: '1800s'})
+  res.send({access_token,username: data.username})
+  }
+)
