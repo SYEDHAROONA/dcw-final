@@ -4,6 +4,7 @@ import MyNavbar from './MyNavbar';
 function Home() {
     return (
         <MyNavbar/>
+        
     )
 }
 
